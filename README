@@ -1,0 +1,36 @@
+angular-seajs-directive-extension is a web framework build with
+angularjs/seajs(a cmd loader)/jquery+plugins
+
+it provides some ui controls as :
+	datepicker
+	autocomplete
+	select2
+	dialog
+	ztree
+	tabletree
+	tabs
+	progressbar
+	slider
+	contextmenu
+	itemselector
+	sort
+	shortkey
+	pagination
+	uploader
+	uploadify
+
+it also has some practise to solve problems as :
+	different windows' controller interaction
+	form validation
+	tips
+	log
+	delegate event binding
+	ng-repeat radio checking
+	ng-repeat select change event trigger
+	synchronised ajax service
+	pagination
+	ajax token
+
+There is a user guide in doc/index-en.html
+Online demos:
+	http://segment11.sinaapp.com/angular-seajs-directive-extension

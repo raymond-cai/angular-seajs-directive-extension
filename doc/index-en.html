@@ -1,0 +1,384 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>develop guide</title>
+
+<link type="text/css" href="bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link type="text/css" href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link type="text/css" href="bootstrap/css/docs.css" rel="stylesheet" />
+<link type="text/css" href="prettify/prettify.css" rel="stylesheet" />
+
+<script src="../js/jquery-1.8.3.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="prettify/prettify.js"></script>
+<script language="javascript">
+$(function(){
+	// make code pretty
+	window.prettyPrint && prettyPrint();
+});
+</script>
+</head>
+
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+    <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="" target="blank">Seajs-Angular</a>
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li class="active">
+                <a href="#">Seajs-Angular develop guide</a>
+            </li>
+        </ul>
+        </div>
+    </div>
+</div>
+</div><!-- /navbar -->
+
+<div class="container">
+
+	<div class="row">
+	<div class="span3 bs-docs-sidebar">
+		<ul class="nav nav-list bs-docs-sidenav affix">
+			<li><a href="#intr"><i class="icon-chevron-right"></i>1.What's</a></li>
+			<li><a href="#struct"><i class="icon-chevron-right"></i>2.Structure</a></li>
+			<li><a href="#lib"><i class="icon-chevron-right"></i>3.UI controls</a></li>
+			<li><a href="#api"><i class="icon-chevron-right"></i>4.Services API</a></li>
+			<li><a href="http://docs.angularjs.org/api/" target="_blank"><i class="icon-chevron-right"></i>5.Angular API Reference</a></li>
+		</ul>
+	</div>
+
+	<div class="span9">
+		<section id="intr">
+			<div class="page-header">
+				<h1>1.What's</h1>
+			</div>
+
+			<p>Seajs-Angular is a web front framework build with Angular/SeaJS/JQuery, it provides</p>
+			<ul>
+				<li>javascript organized by cmd</li>
+				<li>development focus on model operation</li>
+				<li>some ui controls</li>
+			</ul>
+		</section>
+
+		<section id="struct">
+			<div class="page-header">
+				<h1>2.Structure</h1>
+			</div>
+
+			<p class="lead">Structure</p>
+			<p><img src="img/mvc.jpg" /></p>
+
+			<p class="lead">files</p>
+			<p><img src="img/2013-08-31_120351.png" /></p>
+
+			<p class="lead">includes</p>
+			<ul>
+				<li>SeaJS</li>
+				<li>JQuery</li>
+				<li>JQuery Plugins——autocomplete/bgiframe/blockUI/hotkeys/impromptu/maskinput/poshytip/select2/ui-datepicker/ui-slider/ztree</li>
+				<li>Underscore</li>
+				<li>JSON2</li>
+				<li>AngularJS/AngularJS-Resource/AngularJS-UI</li>
+			</ul>
+		</section>
+
+		<section id="lib">
+			<div class="page-header">
+				<h1>3.UI Controls</h1>
+			</div>
+
+			<p class="lead">Module : ng/ng.config.js</p>
+			<p>configuration</p>
+
+			<p class="lead">Module : ng/ng.ui.js</p>
+			<p>directives</p>
+			<ul>
+				<li>datepicker</li>
+				<li>autocomplete</li>
+				<li>select2</li>
+				<li>valid</li>
+				<li>dialog</li>
+				<li>ztree</li>
+				<li>tabletree</li>
+				<li>tabs</li>
+				<li>progressbar</li>
+				<li>slider</li>
+				<li>contextmenu</li>
+				<li>itemselector</li>
+				<li>sort</li>
+				<li>shortkey</li>
+				<li>listWatch</li>
+				<li>pagi</li>
+				<li>portalTab</li>
+				<li>layoutCol</li>
+				<li>delegateBind</li>
+				<li>uploader</li>
+				<li>uploadify</li>
+				<li>window cross controller interaction</li>
+			</ul>
+			<p>eg. datepicker/valid</p>
+			<pre class="prettyprint linenums">
+&lt;td>
+	&lt;label&gt;Begin Date:&lt;/label&gt;
+&lt;/td&gt;
+&lt;td colspan="3"&gt;
+	&lt;span class="input-append"&gt;
+		&lt;input type="text" ng-model="query.handleTimeBegin" 
+			ui-date="{dateFormat: 'yy-mm-dd 00:00'}" 
+			ui-valid="r datetime" /&gt;
+	&lt;/span&gt;
+	&nbsp;-&nbsp;
+	&lt;span class="input-append"&gt;
+		&lt;input type="text" ng-model="query.handleTimeEnd" 
+			ui-date="{dateFormat: 'yy-mm-dd 23:59'}" 
+			ui-valid-tips="Date range must be with in 7 days"
+			ui-valid="r datetime date:rangeout:query.handleTimeBegin:+0 date:range:query.handleTimeBegin:+7" /&gt;
+	&lt;/span&gt;
+&lt;/td&gt;
+			</pre>
+
+			<p>eg. autocomplete/select2/shortkey</p>
+			<pre class="prettyprint linenums">
+&lt;input type="text" ng-model="query.deptLabel" 
+	ui-autocomplete="{url: '/webx/controller/newcore/PocAction/getDeptValLabel.gy', targetModel: 'query.dept'}" 
+	ui-valid="ac:query.dept" /&gt;
+
+&lt;select class="span3" multiple 
+	ng-model="query.test" 
+	ui-select2="{watch: 'optsTest'}" 
+	ng-options="one.v as one.l for one in optsTest"&gt;
+&lt;/select&gt;
+
+&lt;button class="btn btn-primary" ng-click="queryLl()" ui-shortkey="{key: 'ctrl+shift+q', method: 'queryLl'}"&gt;查询&lt;/button&gt;
+			</pre>
+
+			<p>eg. dialog/ztree</p>
+			<pre class="prettyprint linenums">
+&lt;div ui-dialog="" visible="{{queryDetailShow}}" title="TITLE" class="ng-cloak" 
+	on-ok="queryDetailShow=false;dialogClose();" on-cancel="queryDetailShow=false;"&gt;
+	hello dialog hello dialog hello dialog hello dialog hello dialog hello dialog
+	&lt;br /&gt;
+	hello dialog hello dialog hello dialog hello dialog hello dialog hello dialog
+	&lt;br /&gt;
+	hello dialog hello dialog hello dialog hello dialog hello dialog hello dialog
+&lt;/div&gt;
+
+&lt;ul ui-ztree="{fn: 'treeNodeSelected'}" ng-model="testTreeDataList"&gt;&lt;/ul&gt;
+
+$scope.treeNodeSelected = function(treeId, treeNode){
+	uiLog.i(treeNode);
+};
+			</pre>
+
+			<p>eg. delegateBind</p>
+			<pre class="prettyprint linenums">
+&lt;ul ui-delegate-bind="{tag: 'li', eventType: 'click', fn: 'choosedOne'}"&gt;
+	&lt;li&gt;A&lt;/li&gt;
+	&lt;li&gt;B&lt;/li&gt;
+	&lt;li&gt;C&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;a href="tab1.html" title="TEST" ui-tab="{tabId: one.policyId}"&gt;{{one.policyId}}&lt;/a&gt;
+			</pre>
+
+			<p>eg. ng-repeat each item change trigger</p>
+			<pre class="prettyprint linenums">
+		&lt;tr ng-repeat="item in ll"&gt;
+			&lt;td&gt;
+				&lt;select ng-model="item.col1" ui-valid="r" 
+					ext-list-watch="{fn: 'changeChooseLl', targetProperty: 'item.chooseLl2'}" 
+					ng-options="one.code as one.name for one in item.chooseLl1"&gt;
+					&lt;option value=""&gt;--/--&lt;/option&gt;
+				&lt;/select&gt;	
+			&lt;/td&gt;
+			&lt;td&gt;
+				&lt;select ng-model="item.col2" ui-valid="r" 
+					ng-options="one.code as one.name for one in item.chooseLl2"&gt;
+					&lt;option value=""&gt;--/--&lt;/option&gt;
+				&lt;/select&gt;	
+			&lt;/td&gt;
+		&lt;/tr&gt;
+
+				$scope.changeChooseLl = function(val){
+					if(val){
+						return [{code: 'AAA', name: 'AAA'}];
+					}else{
+						return [{code: '2', name: '2'}];
+					}				
+				};
+
+				var ll = [];
+				ll.push({col1: '', chooseLl1: [{code: '1', name: '1'}]});
+				ll.push({col1: '', chooseLl1: [{code: '11', name: '11'}]});
+				$scope.ll = ll;
+			</pre>
+
+			<p>progressbar、slider、contextmenu</p>
+			<pre class="prettyprint linenums">
+
+			&lt;!-- progress bar --&gt;
+			&lt;div class="box" ng-model="progressVal" ui-progress-bar=""&gt;&lt;/div&gt;
+
+			&lt;div ng-model="sliderVal" 
+				style="width: 500px; margin: auto;" 
+				ui-slider="{min: 100, max: 999}"&gt;
+			&lt;/div&gt;
+
+			&lt;div ui-context-menu="{title: 'TEST context menu', fn: 'contextMenuClick'}" ng-model="contextMenuLl"&gt;
+			&lt;/div&gt;
+
+			</pre>
+		</section>
+
+		<section id="api">
+			<p class="lead">Module : ng/ng.service.js</p>
+			<p>Services</p>
+			<ul>
+				<li>PortalUtils</li>
+				<li>log</li>
+				<li>pager</li>
+				<li>request</li>
+				<li>tips</li>
+				<li>valid</li>
+			</ul>
+			<p>API</p>
+			<pre class="prettyprint linenums">
+// do log
+uiLog.log(msg, level)
+@param {Object} msg
+@param {String} level default is INFO
+@return {Empty}
+
+// level = DEBUG
+uiLog.d(msg)
+@param {Object} msg 
+@return {Empty}
+
+// level = INFO
+uiLog.i(msg)
+@param {Object} msg
+@return {Empty}
+
+// level = WARN
+uiLog.w(msg)
+@param {Object} msg
+@return {Empty}
+
+// level = ERROR
+uiLog.e(msg)
+@param {Object} msg
+@return {Empty}
+
+// do log, log will send to server side
+uiLog.audit(msg)
+@param {Object} msg
+@return {Empty}
+			</pre>
+
+			<pre class="prettyprint linenums">
+// pagination
+uiPager.gen(pager)
+@param {Object} pager pagination data - eg. {pageNum: 10, pageSize: 10, totalCount: 100}，可以为空
+@return {Object} return data that bind with html view  - eg. {pageNum: 10, pageSize: 10, totalCount: 100, totalPage: 10, totalPageLl: [{pageNum: 1, btnClass: 'btn-large'}]}
+			</pre>
+			<pre class="prettyprint linenums">
+// filter post data
+uiRequest.filter(params, conf, skipLl)
+@param {Object} params data to be send
+@param {Object} conf options, eg. date format
+@param {Array} skipLl properties should be skipped
+@return {Object} data transfered
+
+// flat data to key-value eg. {persions: [{name: 'John'}]} -> {'persions[0].name': 'John'}
+uiRequest.pairs(obj, name)
+@param {Object} obj json object
+@param {String} name default is '', use for recurse
+@return {Object}
+
+// parse url query parameters
+uiRequest.params(url)
+@param {String} url url
+@return {Object} query parameters
+			</pre>
+			<pre class="prettyprint linenums">
+// show tips on a dom elements
+uiTips.on(el, msg, conf)
+@param {Object} el dom elements
+@param {String} msg tips content
+@param {Object} conf options
+@return {Empty}
+
+// hide tips
+uiTips.off(el, conf)
+@param {Object} el dom elements
+@param {Object} conf options
+@return {Empty}
+
+// use blockUI
+uiTips.loading(fn, msg, opacity)
+@param {Function} fn function that when blockUI show
+@param {String} msg content
+@param {Number} opacity 
+@return {Empty}
+
+// close blockUI
+uiTips.unloading(delay)
+@param {Number} delay delay in ms
+@return {Empty}
+
+uiTips.loadingFn(fn, msg, opacity, delay, syc)
+@param {Function} fn fn function that when blockUI show
+@param {String} msg content
+@param {Number} opacity
+@param {Number} delay delay in ms
+@param {Boolean} syc is synchronize ? if true，close blockUI after fn execution
+@return {Empty}
+
+			</pre>
+			<pre class="prettyprint linenums">
+// valid a form
+uiValid.checkForm($form, $scope)
+@param {Object} $form controller form object
+@param {Object} $scope controller's scope
+@return {Boolean}
+
+// valid by rules
+uiValid.check(val, rules, $scope, tips)
+@param {Object} val target value
+@param {String} rules rules split by space
+@param {Object} $scope controller's scope
+@param {String} tips tips that shows when error
+@return {Boolean}
+
+// add new valid rule
+uiValid.regPat(code, pat, msg)
+@param {String} code rule code
+@param {String} pat rule regexp or function
+@param {String} msg tips that shows when error
+@return {Empty}
+			</pre>
+		</section>
+	</div>
+	</div>
+
+</div><!-- /container -->
+
+<footer class="footer">
+	<div class="container">
+	<p class="pull-right"><a href="#">To top</a></p>
+	<p>Seajs-Angular is a web front framework build with Angular/SeaJS/JQuery</p>
+	</div>
+</footer>
+
+</body>
+</html>
